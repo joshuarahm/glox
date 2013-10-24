@@ -7,11 +7,14 @@
  * QuadStrip.hpp: 
  */
 
+#include <GL/gl.h>
+#include <GL/glu.h>
+
 #include "glox/GloxPointCollection.hpp"
 
 namespace glox {
 
-template <class PlottableT /* extends Plottable */>
+template <class PlottableT /* extends Plottable */ = GloxPoint >
 
 /* This class represents a quad strip
  * for OpenGL. This will draw a collection
@@ -33,9 +36,19 @@ public:
 	inline QuadStrip( const GloxPointCollection<PlottableT>& collection ) :
 		points( collection ) {}
 	
+	/* Plots the points as a GL_QUAD_STRIP */
 	inline virtual void plot() {
-		
+		glBegin( GL_QUAD_STRIP );
+		points.plot();
+		glEnd();
 	}
+
+	/* Appends a point to the collection
+	 * of points to plot */
+	inline void addPoint( const PlottableT& point ) {
+		points.add( point );
+	}
+
 private:
     /* The points that make up this
      * quad strip */

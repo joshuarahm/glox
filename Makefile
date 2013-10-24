@@ -2,19 +2,20 @@ CPPC?=g++
 AR?=ar
 CFLAGS= -Wall -Wextra -I.
 LDFLAGS=
-OBJECTS=obs/Tree.o obs/Sphere.o
+OBJECTS=obs/GloxLightSource.o obs/GloxLightSourceManager.o
+BINARY=libglox.a
 all: setup $(OBJECTS)
-	$(AR) -r libglcommon.a $(OBJECTS)
-
+	$(AR) -r $(BINARY) $(OBJECTS)
 
 setup:
 	mkdir -p obs/
 
 clean:
-	- rm -rf obs libglcommon.a
-obs/Tree.o: ./graphics/objects/Tree.cpp
+	- rm -rf obs $(BINARY)
+
+obs/GloxLightSource.o: ./glox/private.db/GloxLightSource.cpp
 	$(CPPC) $(CFLAGS) -o $@ -c $<
 
-obs/Sphere.o: ./graphics/objects/Sphere.cpp
+obs/GloxLightSourceManager.o: ./glox/private.db/GloxLightSourceManager.cpp
 	$(CPPC) $(CFLAGS) -o $@ -c $<
 

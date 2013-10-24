@@ -7,7 +7,8 @@
  * GloxPoint.hpp: <description>
  */
 
-#include "glox/Plottable.hpp"
+#include "glox/GloxCommon.hpp"
+#include "glox/GloxPlottable.hpp"
 
 namespace glox {
 

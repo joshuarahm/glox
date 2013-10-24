@@ -7,7 +7,7 @@
  * Sphere.hpp: <description>
  */
 
-#include "graphics/common/Common.hpp"
+#include "glox/common/Common.hpp"
 
 #include <cstdlib>
 

@@ -1,6 +1,8 @@
 #ifndef COLOR_HPP_
 #define COLOR_HPP_
 
+#warn "This Color type is deprecated. Use glox/GloxColor"
+
 namespace graphics {
 
 inline uint8_t color_float_to_int( float i ) {
