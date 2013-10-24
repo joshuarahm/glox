@@ -11,11 +11,11 @@ namespace glox {
 
 /* A plottable object is an object which
  * can plot itself */
-class Plottable {
+class GloxPlottable {
 public:
     /* Plot this object on the
      * space */
-    virtual void plot() = 0;
+    virtual void plot() const = 0;
 };
 
 }

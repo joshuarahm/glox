@@ -7,19 +7,19 @@
  * GloxNormal.hpp: <description>
  */
 
-#include "glox/Plottable.hpp"
+#include "glox/GloxPlottable.hpp"
 
 namespace glox {
 
 /* Type that the GloxNormal holds,
  * defaults to an integer */
-template <class NumT=int>
+template <class NumT=float>
 
 /* A normal in 3D space. This class
  * implements Plottable which provides
  * the `plot` function which calles
  * glVertex on the components */
-class GloxNormal : public Plottable {
+class GloxNormal : public GloxPlottable {
 public:
 	/* Creates a new GloxNormal from the components
 	 * specified */
@@ -94,7 +94,7 @@ public:
 
 	/* Plot this normal. This function depends on the
 	 * number provided */
-	inline void plot( );
+	inline void plot( ) const;
 private:
 	NumT x;
 	NumT y;
@@ -104,19 +104,19 @@ private:
 /* Implementations of the plot functions for
  * different template arguments */
 template <>
-inline void GloxNormal<int>::plot() {
+inline void GloxNormal<int>::plot() const {
     glNormal3i( this->getX(), this->getY(), this->getZ() );
 }
 template <>
-inline void GloxNormal<float>::plot() {
+inline void GloxNormal<float>::plot() const {
     glNormal3f( this->getX(), this->getY(), this->getZ() );
 }
 template <>
-inline void GloxNormal<short>::plot() {
+inline void GloxNormal<short>::plot() const {
     glNormal3s( this->getX(), this->getY(), this->getZ() );
 }
 template <class T>
-inline void GloxNormal<T>::plot() {
+inline void GloxNormal<T>::plot() const {
     glNormal3d( this->getX(), this->getY(), this->getZ() );
 }
 

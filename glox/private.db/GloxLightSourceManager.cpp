@@ -30,7 +30,7 @@ GloxLightSource* GloxLightSourceManager::getLightSource( int id ) {
 		return m_sources[id];
 	}
 
-	GloxLightSource* lightSource = new GloxLightSource();
+	GloxLightSource* lightSource = new GloxLightSource( light_source_gl[id] );
 	m_sources[id] = lightSource;
 
 	return lightSource;

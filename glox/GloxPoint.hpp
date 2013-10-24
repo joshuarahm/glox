@@ -14,13 +14,13 @@ namespace glox {
 
 /* Type that the GloxPoint holds,
  * defaults to an integer */
-template <class NumT=int>
+template <class NumT=float>
 
 /* A point in 3D space. This class
  * implements Plottable which provides
  * the `plot` function which calles
  * glVertex on the components */
-class GloxPoint : public Plottable {
+class GloxPoint : public GloxPlottable {
 public:
 	/* Creates a new GloxPoint from the components
 	 * specified */
@@ -95,7 +95,7 @@ public:
 
 	/* Plot this point. This function depends on the
 	 * number provided */
-	inline void plot( );
+	inline void plot( ) const;
 private:
 	NumT x;
 	NumT y;
@@ -105,19 +105,19 @@ private:
 /* Implementations of the plot functions for
  * different template arguments */
 template <>
-inline void GloxPoint<int>::plot() {
+inline void GloxPoint<int>::plot() const {
     glVertex3i( this->getX(), this->getY(), this->getZ() );
 }
 template <>
-inline void GloxPoint<float>::plot() {
+inline void GloxPoint<float>::plot() const {
     glVertex3f( this->getX(), this->getY(), this->getZ() );
 }
 template <>
-inline void GloxPoint<short>::plot() {
+inline void GloxPoint<short>::plot() const {
     glVertex3s( this->getX(), this->getY(), this->getZ() );
 }
 template <class T>
-inline void GloxPoint<T>::plot() {
+inline void GloxPoint<T>::plot() const {
     glVertex3d( this->getX(), this->getY(), this->getZ() );
 }
 

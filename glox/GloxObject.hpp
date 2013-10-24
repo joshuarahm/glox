@@ -21,7 +21,7 @@ namespace glox {
 class GloxObject {
 public:
 	/* Draws this object */
-	virtual void draw() = 0;
+	virtual void draw() const = 0;
 };
 
 }

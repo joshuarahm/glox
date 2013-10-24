@@ -7,13 +7,14 @@
  * GloxColor.hpp: <description>
  */
 
-#include "GloxCommon.hpp"
+#include "glox/GloxCommon.hpp"
+#include "glox/GloxRenderable.hpp"
 
 namespace glox {
 
 /* This is a color class, it is for
  * convinience */
-class GloxColor {
+class GloxColor : public GloxRenderable {
 public:
     /* Creates a new color that is defined
      * from the float values for r, g, b. The 
@@ -29,6 +30,14 @@ public:
     inline uint8_t getG() const { return g; } 
     inline uint8_t getB() const { return b; } 
     inline uint8_t getA() const { return a; } 
+
+    inline void render() const {
+        if( a < 255 ) {
+            glColor4ub( r, g, b, a );
+        } else {
+            glColor3ub( r, g, b );
+        }
+    }
 
 private:
     uint8_t r; 

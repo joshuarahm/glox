@@ -7,17 +7,22 @@
  * GloxPointCollection.hpp: <description>
  */
 
-#include "glox/Plottable.hpp"
+#include "glox/GloxPlottable.hpp"
+
+#include <vector>
 
 namespace glox {
 
-template <class PlottableT=GloxPoint>
+template < class PlottableT=GloxPoint<float> >
 
 /* GloxPointCollection: a collection of Plottable that
  * may be plotted in bulk */
-class GloxPointCollection : public Plottable {
+class GloxPointCollection : public GloxPlottable {
 public:
-	typedef m_Vec_t::iterator iterator;
+	/* Shorter vector term */
+	typedef std::vector< PlottableT > m_Vec_t;
+	typedef typename m_Vec_t::iterator iterator;
+	typedef typename m_Vec_t::const_iterator const_iterator;
 
 	/* Constructs a new GloxPointCollection with
 	 * no Points */
@@ -34,8 +39,8 @@ public:
 	
 	/* Iterate through the vector of Plottable
 	 * and call their plot functions */
-	virtual void plot() {
-		for( iterator itr = this->begin(); itr != this->end(); ++ itr ) {
+	virtual void plot() const {
+		for( const_iterator itr = this->begin(); itr != this->end(); ++ itr ) {
 			(*itr).plot();
 		}
 	}
@@ -56,13 +61,22 @@ public:
 		return points.end();
 	}
 
+	/* Returns an iterator for this
+	 * GloxPointCollection */
+	inline const_iterator begin() const {
+		return points.begin();
+	}
+
+	/* Returns then end of the const_iterator */
+	inline const_iterator end() const {
+		return points.end();
+	}
+
 private:
-	/* Shorter vector term */
-	typedef std::vector< PlottableT > m_Vec_t
 
 	/* The points to plot */
 	m_Vec_t  points;
-}
+};
 
 };
 

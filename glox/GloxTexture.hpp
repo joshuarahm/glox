@@ -7,8 +7,12 @@
  * GloxTexture.hpp: <description>
  */
 
+namespace glox {
+
 class GloxTexture {
 public:
+};
+
 }
 
 #endif /* GLOXTEXTURE_HPP_ */

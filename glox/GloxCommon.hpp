@@ -3,6 +3,7 @@
 
 #include <inttypes.h>
 #include <cstdio>
+#include <math.h>
 
 /* Include the OpenGL stuff */
 #include "GL/gl.h"
@@ -22,6 +23,14 @@ namespace glox {
     typedef signed char Glox8;
     typedef unsigned short Glox16u;
     typedef signed short Glox16;
+
+    inline double GloxCos( double th ) {
+        return cos(3.1415927/180*(th));
+    }
+
+    inline double GloxSin( double th ) {
+        return sin(3.1415927/180*(th));
+    }
 };
 
 #endif /* GLOXCOMMON_HPP_ */

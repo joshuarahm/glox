@@ -14,7 +14,7 @@
 
 namespace glox {
 
-template <class PlottableT /* extends Plottable */ = GloxPoint >
+template <class PlottableT /* extends Plottable */ = GloxPoint<float> >
 
 /* This class represents a quad strip
  * for OpenGL. This will draw a collection
@@ -24,20 +24,22 @@ template <class PlottableT /* extends Plottable */ = GloxPoint >
  * means that it may be plotted, but
  * that it IS dependent on state
  * of the OpenGL machine */
-class GloxQuadStrip : public Plottable {
+class GloxQuadStrip : public GloxPlottable {
 public: 
+    inline GloxQuadStrip() :
+        points() {}
 	/* Creates a new GloxQuadStrip with the points
 	 * given as a vector as it's initial points */
-    inline QuadStrip( const std::vector< PlottableT >& points ) :
+    inline GloxQuadStrip( const std::vector< PlottableT >& points ) :
 		points( points ) {}
 
 	/* Creates a new GloxQuadStrip with the points
 	 * given as a collection of points */
-	inline QuadStrip( const GloxPointCollection<PlottableT>& collection ) :
+	inline GloxQuadStrip( const GloxPointCollection<PlottableT>& collection ) :
 		points( collection ) {}
 	
 	/* Plots the points as a GL_QUAD_STRIP */
-	inline virtual void plot() {
+	inline virtual void plot() const {
 		glBegin( GL_QUAD_STRIP );
 		points.plot();
 		glEnd();
