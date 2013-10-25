@@ -9,6 +9,10 @@
 
 #include "glox/GloxCommon.hpp"
 #include "glox/GloxPlottable.hpp"
+#include "glox/GloxVectorizable.hpp"
+
+#include <string>
+#include <sstream>
 
 namespace glox {
 
@@ -20,7 +24,7 @@ template <class NumT=float>
  * implements Plottable which provides
  * the `plot` function which calles
  * glVertex on the components */
-class GloxPoint : public GloxPlottable {
+class GloxPoint : public GloxPlottable,GloxVectorizable<NumT> {
 public:
 	/* Creates a new GloxPoint from the components
 	 * specified */
@@ -56,14 +60,14 @@ public:
 	}
 
 	/* Sets the Y component of this point */
-	inline void setY( const NumT& x ) {
-		this->x = x;
+	inline void setY( const NumT& y ) {
+		this->y = y;
 	}
 
 	/* Sets the Z component of this
 	 * point */
-	inline void setZ( const NumT& x ) {
-		this->x = x;
+	inline void setZ( const NumT& z ) {
+		this->z = z;
 	}
 
 	/* Copy the point `point` into this
@@ -93,6 +97,24 @@ public:
 		return ret;
 	}
 
+    inline std::string toString() const {
+        std::stringstream stream;
+        stream << "( " << x << ", " << y << ", " << z << " )";
+        return stream.str();
+    }
+
+    virtual inline void scale( NumT amt ) {
+        x *= amt; y *= amt; z *= amt;
+    }
+
+    int toVector( NumT* arr, size_t len ) const {
+        if( len < 3 ) return -1;
+        arr[0] = x;
+        arr[1] = y;
+        arr[2] = z;
+        return 3;
+    }
+
 	/* Plot this point. This function depends on the
 	 * number provided */
 	inline void plot( ) const;
@@ -101,6 +123,8 @@ private:
 	NumT y;
 	NumT z;
 };
+
+typedef GloxPoint<> GloxPointf;
 
 /* Implementations of the plot functions for
  * different template arguments */

@@ -1,16 +1,10 @@
-#include  "glox/GloxLightSource.hpp"
-
+#include "glox/GloxLightSource.hpp"
+#include "glox/GloxDebug.hpp"
 namespace glox {
-
-static void conv_to_vec4( const GloxColor& color, float arr[4] ) {
-	arr[0] = color.getR();
-	arr[1] = color.getG();
-	arr[2] = color.getB();
-	arr[3] = color.getA();
-}
 
 void GloxLightSource::render() const {
 	if( ! this->isEnabled() ) {
+		GloxTrace( "GloxLightSource", "Light %d Disabled\n", index );
 		return ;
 	}
 
@@ -20,22 +14,30 @@ void GloxLightSource::render() const {
 		glLightModelf( (*itr).first, (*itr).second );
 	}
 
+	glEnable( m_light );
+
 	/* Set the position of the light */
-	float vec [] = { (float)m_pos.getX(), (float)m_pos.getY(),
-		(float)m_pos.getZ(), directional ? 0.0f : 1.0f };
+	float vec [4];
 
-	conv_to_vec4( this->ambient, vec );
-    glLightfv(GL_LIGHT0,GL_AMBIENT, vec);
+	this->ambient.toVector( vec, 4 );
+	GloxTrace( "GloxLightSource", "ambient: {%f, %f, %f, %f}\n", vec[0], vec[1], vec[2], vec[3] );
+    glLightfv(m_light,GL_AMBIENT, vec);
 
-	conv_to_vec4( this->diffuse, vec );
-    glLightfv(GL_LIGHT0,GL_DIFFUSE ,vec);
+	this->diffuse.toVector( vec, 4 );
+	GloxTrace( "GloxLightSource", "diffuse: %s\n", this->diffuse.toString().c_str() );
+	GloxTrace( "GloxLightSource", "diffuse: {%f, %f, %f, %f}\n", vec[0], vec[1], vec[2], vec[3] );
+    glLightfv(m_light,GL_DIFFUSE ,vec);
 
-	conv_to_vec4( this->specular, vec );
-    glLightfv(GL_LIGHT0,GL_SPECULAR,vec);
+	this->specular.toVector( vec, 4 );
+	GloxTrace( "GloxLightSource", "specular: {%f, %f, %f, %f}\n", vec[0], vec[1], vec[2], vec[3] );
+    glLightfv(m_light,GL_SPECULAR,vec);
+
 
 	/* enable this light */
 	glEnable( this->m_light );
-    glLightfv(GL_LIGHT0,GL_POSITION,vec);
+	this->m_pos.toVector( vec, 4 );
+
+    glLightfv(m_light,GL_POSITION,vec);
 }
 
 }

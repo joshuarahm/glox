@@ -32,7 +32,7 @@ public:
     /* Renders the lighting  for this GloxLightSourceManager.
      * This will render the scene with the lights in this
      * manager and only the lights in this manager */
-    void render() ;
+    void render() const ;
 
     /* Returns the light source with
      * the ID `id'. Valid ID's are

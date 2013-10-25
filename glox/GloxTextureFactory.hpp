@@ -7,7 +7,10 @@
  * GloxTextureFactory.hpp: <description>
  */
 
+#include "glox/GloxTexture.hpp"
+
 #include <iostream>
+#include <string>
 
 namespace glox {
 
@@ -19,7 +22,7 @@ public:
     /* Creates a new texture from a bitmap
      * image. If there is an error, NULL is
      * returned */
-	static GloxTexture* buildTextureFromBmp( std::istream& stream );
+	static GloxTexture* textureFromBitmap( std::istream& stream );
 
 #ifndef NO_JPG_SUPPORT
 	static GloxTexture* buildTextureFromJpg( std::istream& stream );
@@ -29,7 +32,8 @@ public:
 	static GloxTexture* buildTextureFromPng( std::istream& stream );
 #endif
 
-}
+	static const std::string& getErrorMessage();
+};
 
 }
 

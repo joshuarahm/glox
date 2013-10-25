@@ -8,7 +8,7 @@
  */
 
 #include "glox/GloxObject.hpp"
-#include "glox/GloxPointNormal.hpp"
+#include "glox/GloxPointNormalTexture.hpp"
 
 #include "glox/GloxTexture.hpp"
 #include "glox/GloxQuadStrip.hpp"
@@ -28,11 +28,8 @@ public:
     /* Creates a cylinder with the radius r and the height
      * h. th_res specifies the radial resolution of this
      * cylinder */
-    GloxCylinder( const GloxPoint<float>& pos, float r, float h, float th_res=6 );
-
-    /* Sets the texture to pin to this
-     * cylinder */
-    void setTexture( const GloxTexture* texture );
+    GloxCylinder( const GloxPoint<float>& pos, float r, float h,
+        float th_res=6, const GloxTexture* texture=NULL );
 
     /* Get the position of this
      * Cylinder */
@@ -46,16 +43,22 @@ public:
     }
 
     inline void draw() const {
+        if( m_texture ) {
+            glEnable(GL_TEXTURE_2D);
+            m_texture->bind();
+        } else {
+            glDisable(GL_TEXTURE_2D);
+        }
         /* Color of the tree without a texture */
         static const GloxColor brown( 139, 69, 19 );
         /* Translate to the position of
          * this object */
-        GloxScopedTranslation t( m_position );
+        GloxScopedTranslation trans( m_position );
 
         /* Set the OpenGL state machine to
          * use brown as the color */
-        brown.render();
         m_body.plot();
+        glDisable(GL_TEXTURE_2D);
     }
 
 private:
@@ -65,7 +68,10 @@ private:
     /* the cylinder is basically just a quad
      * strip. This object supports lighting,
      * so the components are PointNormals */
-    GloxQuadStrip< GloxPointNormal<> > m_body;
+    GloxQuadStrip< GloxPointNormalTexture > m_body;
+
+    /* the texture used for ths cylinder */
+    const GloxTexture* m_texture;
 };
 
 };

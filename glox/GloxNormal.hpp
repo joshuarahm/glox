@@ -9,6 +9,9 @@
 
 #include "glox/GloxPlottable.hpp"
 
+#include <string>
+#include <sstream>
+
 namespace glox {
 
 /* Type that the GloxNormal holds,
@@ -55,14 +58,14 @@ public:
 	}
 
 	/* Sets the Y component of this normal */
-	inline void setY( const NumT& x ) {
-		this->x = x;
+	inline void setY( const NumT& y ) {
+		this->y = y;
 	}
 
 	/* Sets the Z component of this
 	 * normal */
-	inline void setZ( const NumT& x ) {
-		this->x = x;
+	inline void setZ( const NumT& z ) {
+		this->z = z;
 	}
 
 	/* Copy the normal `normal` into this
@@ -91,6 +94,12 @@ public:
 		ret += normal;
 		return ret;
 	}
+
+    inline std::string toString() const {
+        std::stringstream stream;
+        stream << "( " << x << ", " << y << ", " << z << " )";
+        return stream.str();
+    }
 
 	/* Plot this normal. This function depends on the
 	 * number provided */

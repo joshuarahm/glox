@@ -4,9 +4,11 @@
 #include <inttypes.h>
 #include <cstdio>
 #include <math.h>
+#include <algorithm>
+#include <cstdlib>
 
 /* Include the OpenGL stuff */
-#include "GL/gl.h"
+#include <GL/gl.h>
 
 /*
  * Author: jrahm
@@ -31,6 +33,7 @@ namespace glox {
     inline double GloxSin( double th ) {
         return sin(3.1415927/180*(th));
     }
+
 };
 
 #endif /* GLOXCOMMON_HPP_ */

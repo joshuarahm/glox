@@ -1,4 +1,5 @@
 #include "glox/GloxLightSourceManager.hpp"
+#include "glox/GloxState.hpp"
 
 namespace glox {
 
@@ -14,9 +15,11 @@ int light_source_gl[] = {
 	GL_LIGHT7,
 };
 
-void GloxLightSourceManager::render() {
-    glEnable( GL_NORMALIZE );
-	glEnable( GL_LIGHTING );
+void GloxLightSourceManager::render() const {
+    GloxState::enable( GL_NORMALIZE );
+	GloxState::enable( GL_LIGHTING );
+    GloxState::colorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
+    GloxState::enable(GL_COLOR_MATERIAL);
 
 	for ( size_t i = 0 ; i < GLOX_MAX_NUM_LIGHTS; ++ i ) {
 		if( m_sources[i] ) {

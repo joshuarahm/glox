@@ -11,6 +11,9 @@
 #include "glox/GloxPoint.hpp"
 #include "glox/GloxNormal.hpp"
 
+#include <string>
+#include <sstream>
+
 namespace glox {
 
 /* The number type used by both
@@ -55,6 +58,11 @@ public:
 		return m_normal;
 	}
 	
+    inline const std::string toString() const {
+        std::stringstream ret;
+        ret << "GloxPointNormal{ " << m_point.toString() << ", " << m_normal.toString() << " }" ;
+        return ret.str();
+    }
 private:
 	GloxPoint<NumT> m_point;
 	GloxNormal<NumT> m_normal;

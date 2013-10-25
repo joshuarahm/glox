@@ -1,15 +1,29 @@
 #include "glox/objects/examples/GloxCylinder.hpp"
+#include "glox/GloxDebug.hpp"
 
 namespace glox {
 
-GloxCylinder::GloxCylinder( const GloxPoint<float>& pos, float r, float h, float th_res ) :
+GloxCylinder::GloxCylinder( const GloxPoint<float>& pos, float r, float h, float th_res, const GloxTexture* texture ) :
     m_position( pos ) {
     float th = 0;
+    m_texture = texture;
 
     GloxPoint<> point;
     GloxNormal<> normal;
+    GloxPoint<> texPoint;
 
-    for( ; th <= 360; th += th_res ) {
+    float texStep;
+
+    /* The position in the texture */
+    float texPos = 0;
+
+    if( m_texture ) {
+        /* We want the texture to map exactly
+         * to the sphere */
+        texStep = th_res / 360;
+    }
+
+    for( ; th <= 360; th += th_res, texPos += texStep ) {
         point.setX( r * GloxCos( th ) );
         point.setZ( r * GloxSin( th ) );
         point.setY( 0 );
@@ -18,19 +32,21 @@ GloxCylinder::GloxCylinder( const GloxPoint<float>& pos, float r, float h, float
         normal.setY( 0 );
         normal.setZ( point.getZ() );
 
+        texPoint.setX( texPos );
+        texPoint.setY( 1 );
+        texPoint.setZ( 0 );
+
         /* Add the new PointNormal to the
          * body */
-        m_body.addPoint( GloxPointNormal<>( point, normal ) );
+        m_body.addPoint( GloxPointNormalTexture( point, normal, texPoint ) );
 
         /* The upper portion of the
          * cylinder */
-        point.setX( r * GloxCos( th ) );
-        point.setZ( r * GloxSin( th ) );
         point.setY( h );
+		texPoint.setY( 0 );
 
         // The normal remains the same
-
-        m_body.addPoint( GloxPointNormal<>( point, normal ) );
+        m_body.addPoint( GloxPointNormalTexture( point, normal, texPoint ) );
     }
 }
 

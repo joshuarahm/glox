@@ -31,6 +31,8 @@ public:
 		m_pos = position;
 		this->directional = directional;
 	}
+
+	inline const GloxPointf& getPosition() { return m_pos ; }
 	
 	/* Sets whether this light is
 	 * enabled or not */
@@ -52,7 +54,7 @@ public:
 	}
 
 	inline void setSpecular( const GloxColor& color ) {
-		this->diffuse = color;
+		this->specular = color;
 	}
 
 	inline void setLightModelAttribute( GLenum attr, float value ) {

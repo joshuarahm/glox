@@ -8,8 +8,11 @@
  */
 
 #include "glox/GloxPlottable.hpp"
+#include "glox/GloxDebug.hpp"
 
 #include <vector>
+#include <string>
+#include <sstream>
 
 namespace glox {
 
@@ -40,6 +43,8 @@ public:
 	/* Iterate through the vector of Plottable
 	 * and call their plot functions */
 	virtual void plot() const {
+        // GloxTrace( "GloxPointCollection", "plot(): this = %s\n", this->toString().c_str() );
+
 		for( const_iterator itr = this->begin(); itr != this->end(); ++ itr ) {
 			(*itr).plot();
 		}
@@ -71,6 +76,16 @@ public:
 	inline const_iterator end() const {
 		return points.end();
 	}
+
+    inline std::string toString() const {
+        std::stringstream stream;
+        stream << "[ ";
+		for( const_iterator itr = this->begin(); itr != this->end(); ++ itr ) {
+			stream << (*itr).toString() << ", ";
+		}
+        stream << "]";
+        return stream.str();
+    }
 
 private:
 
