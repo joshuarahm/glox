@@ -104,6 +104,11 @@ public:
 	/* Plot this normal. This function depends on the
 	 * number provided */
 	inline void plot( ) const;
+
+    /* Does exactly the same thing that plot does, but
+     * sometimes it is better to be more explicit about
+     * what plot is actually doing */
+    inline void glNormal() const { plot() ; } 
 private:
 	NumT x;
 	NumT y;

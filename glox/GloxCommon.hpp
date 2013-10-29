@@ -17,6 +17,17 @@
  */
 
 namespace glox {
+    #define GloxWith( en, code ) \
+        { glBegin( en ) ; \
+            code  ;\
+          glEnd(); }
+
+    #define GloxEnableFor( en, code ) \
+        { glEnable( en ) ; code ; glDisable( en ); }
+
+    #define GloxDisableFor( en, code ) \
+        { glDisable( en ) ; code ; glEnable( en ) ; }
+
     typedef long long Glox64;
     typedef unsigned long long Glox64u;
     typedef int Glox32;

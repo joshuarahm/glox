@@ -31,8 +31,8 @@ public:
 		m_PointNormal( point, normal ), m_TextureMap( texPoint ) {}
 
 	inline void plot() const {
-		m_PointNormal.plot();
 		glTexCoord2f( m_TextureMap.getX(), m_TextureMap.getY() );
+		m_PointNormal.plot();
 	}
 
 	inline const GloxPointNormal<>& getPointNormal() const { return m_PointNormal; }

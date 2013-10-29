@@ -66,6 +66,10 @@ public:
 		return points.end();
 	}
 
+    inline void clear() { 
+        points.clear();
+    }
+
 	/* Returns an iterator for this
 	 * GloxPointCollection */
 	inline const_iterator begin() const {

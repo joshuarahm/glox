@@ -1,3 +1,4 @@
+#define COMPILING_CYLINDER
 #include "glox/objects/examples/GloxCylinder.hpp"
 #include "glox/GloxDebug.hpp"
 

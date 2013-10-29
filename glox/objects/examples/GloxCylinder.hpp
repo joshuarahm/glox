@@ -18,6 +18,10 @@
 
 #include "glox/GloxPoint.hpp"
 
+#ifndef COMPILING_CYLINDER
+#warn "Do Not Use This Class, it is broken!"
+#endif
+
 namespace glox {
 
 /* This is an example object that draws
