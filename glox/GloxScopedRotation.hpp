@@ -5,6 +5,7 @@
  */
 
 #include "glox/GloxState.hpp"
+#include "glox/GloxRotation.hpp"
 
 namespace glox {
 
@@ -12,12 +13,20 @@ namespace glox {
  * the current scope */
 class GloxScopedRotation {
 public:
-	inline GloxScopedRotation( double angle, double x, double, y, double z ) {
+	inline GloxScopedRotation( double angle, double x, double y, double z ) {
 		GloxState::pushMatrix();
-		GloxState::rotate( ang, x, y, z );
+		GloxState::rotate( angle, x, y, z );
+	}
+
+	inline GloxScopedRotation( const GloxRotation& rotation ) {
+		GloxState::pushMatrix();
+		GloxState::rotate( rotation.getAngle(), rotation.getX(),
+	      rotation.getY(), rotation.getZ() );
 	}
 
 	inline ~GloxScopedRotation( ) {
 		GloxState::popMatrix();
 	}
 };
+
+}

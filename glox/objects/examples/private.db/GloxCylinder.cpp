@@ -3,7 +3,7 @@
 
 namespace glox {
 
-GloxCylinder::GloxCylinder( const GloxPoint<float>& pos, float r, float h, float th_res, const GloxTexture* texture ) :
+GloxCylinder::GloxCylinder( const GloxPoint<float>& pos, float r, float h, float th_res, const GloxTexture* texture, bool normals, float rep, float repy ) :
     m_position( pos ) {
     float th = 0;
     m_texture = texture;
@@ -20,7 +20,7 @@ GloxCylinder::GloxCylinder( const GloxPoint<float>& pos, float r, float h, float
     if( m_texture ) {
         /* We want the texture to map exactly
          * to the sphere */
-        texStep = th_res / 360;
+        texStep = th_res / 360 * rep;
     }
 
     for( ; th <= 360; th += th_res, texPos += texStep ) {
@@ -28,12 +28,14 @@ GloxCylinder::GloxCylinder( const GloxPoint<float>& pos, float r, float h, float
         point.setZ( r * GloxSin( th ) );
         point.setY( 0 );
 
-        normal.setX( point.getX() );
-        normal.setY( 0 );
-        normal.setZ( point.getZ() );
+		if( normals ) {
+        	normal.setX( point.getX() );
+        	normal.setY( 0 );
+        	normal.setZ( point.getZ() );
+		}
 
         texPoint.setX( texPos );
-        texPoint.setY( 1 );
+        texPoint.setY( repy );
         texPoint.setZ( 0 );
 
         /* Add the new PointNormal to the

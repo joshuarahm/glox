@@ -11,6 +11,7 @@
 
 #include "glox/GloxPerspective.hpp"
 #include "glox/GloxState.hpp"
+#include "glox/GloxDebug.hpp"
 
 namespace glox {
 
@@ -20,7 +21,7 @@ class GloxLookAtPerspective : public GloxPerspective {
 public:
 	inline GloxLookAtPerspective( const GloxPoint<>& pos=GloxPoint<>(),
 		const GloxPoint<>& lookAt=GloxPoint<>(), const GloxPoint<>& upVec=GloxPoint<>( 0.0f, 1.0f, 0.0f ),
-		double fov=50.0, double asp=1.8, double zn=0.1, double zfar=100.0) :
+		double fov=50.0, double asp=1.8, double zn=0.1, double zfar=500.0) :
 		GloxPerspective::GloxPerspective( pos ), m_LookAtPoint( lookAt ), m_UpVector( upVec ),
 		m_FieldOfView( fov ), m_AspectRatio( asp ), m_ZNear( zn ), m_ZFar( zfar )
 		{}
@@ -29,7 +30,7 @@ public:
 		GloxState::matrixMode(GL_PROJECTION);
 		GloxState::loadIdentity();
 
-		printf( "fov: %f, asp: %f, znear: %f, zfar: %f\n", m_FieldOfView, m_AspectRatio, m_ZNear, m_ZFar );
+		GloxTrace( "project", "fov: %f, asp: %f, znear: %f, zfar: %f\n", m_FieldOfView, m_AspectRatio, m_ZNear, m_ZFar );
 		gluPerspective( m_FieldOfView, m_AspectRatio, m_ZNear, m_ZFar );
 
 		GloxState::matrixMode(GL_MODELVIEW);
@@ -37,7 +38,7 @@ public:
 	}
 	
 	inline virtual void render() const {
-		printf(    "gluLookAt (%f, %f, %f) ( %f, %f, %f ), ( %f, %f, %f )\n",
+		GloxTrace(  "render",  "gluLookAt (%f, %f, %f) ( %f, %f, %f ), ( %f, %f, %f )\n",
 				   getPosition().getX(), getPosition().getY(), getPosition().getZ(),
 		           m_LookAtPoint.getX(), m_LookAtPoint.getY(), m_LookAtPoint.getZ(),
 		           m_UpVector.getX()   , m_UpVector.getY()   , m_UpVector.getZ()    );

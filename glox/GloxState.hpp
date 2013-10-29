@@ -8,6 +8,7 @@
  */
 
 #include "glox/GloxCommon.hpp"
+#include "glox/GloxPoint.hpp"
 
 namespace glox {
 
@@ -28,6 +29,10 @@ public:
 
     inline static void enable( GLenum e ) {
         glEnable( e );
+    }
+
+    inline static void disable( GLenum e ) {
+        glDisable( e );
     }
 
     inline static void flush() {

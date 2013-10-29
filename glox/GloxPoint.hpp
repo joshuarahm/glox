@@ -10,6 +10,7 @@
 #include "glox/GloxCommon.hpp"
 #include "glox/GloxPlottable.hpp"
 #include "glox/GloxVectorizable.hpp"
+#include "glox/GloxVector4.hpp"
 
 #include <string>
 #include <sstream>
@@ -26,6 +27,19 @@ template <class NumT=float>
  * glVertex on the components */
 class GloxPoint : public GloxPlottable,GloxVectorizable<NumT> {
 public:
+	inline static GloxPoint<> fromSpherical( NumT r, NumT th, NumT ph ) {
+   // double Ex = -2*dim*Sin(th)*Cos(ph);
+   // double Ey = +2*dim        *Sin(ph);
+   // double Ez = +2*dim*Cos(th)*Cos(ph);
+		return GloxPoint<>( -r * GloxSin( th ) * GloxCos( ph ),
+		                     r * GloxSin( ph ),
+							 r * GloxCos( th ) * GloxCos( ph ) ) ;
+	}
+	
+	inline static GloxPoint<> fromSpherical( const GloxVector4<NumT>& vec ) {
+		return fromSpherical( vec.getX(), vec.getY(), vec.getZ() );
+	}
+
 	/* Creates a new GloxPoint from the components
 	 * specified */
 	inline GloxPoint( const NumT& x=0, const NumT& y=0, const NumT& z=0 ):

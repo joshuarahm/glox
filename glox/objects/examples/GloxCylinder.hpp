@@ -29,7 +29,7 @@ public:
      * h. th_res specifies the radial resolution of this
      * cylinder */
     GloxCylinder( const GloxPoint<float>& pos, float r, float h,
-        float th_res=6, const GloxTexture* texture=NULL );
+        float th_res=6, const GloxTexture* texture=NULL, bool normals=true, float rep=1, float repy=1 );
 
     /* Get the position of this
      * Cylinder */

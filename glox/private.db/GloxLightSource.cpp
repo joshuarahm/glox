@@ -20,16 +20,16 @@ void GloxLightSource::render() const {
 	float vec [4];
 
 	this->ambient.toVector( vec, 4 );
-	GloxTrace( "GloxLightSource", "ambient: {%f, %f, %f, %f}\n", vec[0], vec[1], vec[2], vec[3] );
+	//GloxTrace( "GloxLightSource", "ambient: {%f, %f, %f, %f}\n", vec[0], vec[1], vec[2], vec[3] );
     glLightfv(m_light,GL_AMBIENT, vec);
 
 	this->diffuse.toVector( vec, 4 );
-	GloxTrace( "GloxLightSource", "diffuse: %s\n", this->diffuse.toString().c_str() );
-	GloxTrace( "GloxLightSource", "diffuse: {%f, %f, %f, %f}\n", vec[0], vec[1], vec[2], vec[3] );
+	//GloxTrace( "GloxLightSource", "diffuse: %s\n", this->diffuse.toString().c_str() );
+	//GloxTrace( "GloxLightSource", "diffuse: {%f, %f, %f, %f}\n", vec[0], vec[1], vec[2], vec[3] );
     glLightfv(m_light,GL_DIFFUSE ,vec);
 
 	this->specular.toVector( vec, 4 );
-	GloxTrace( "GloxLightSource", "specular: {%f, %f, %f, %f}\n", vec[0], vec[1], vec[2], vec[3] );
+	//GloxTrace( "GloxLightSource", "specular: {%f, %f, %f, %f}\n", vec[0], vec[1], vec[2], vec[3] );
     glLightfv(m_light,GL_SPECULAR,vec);
 
 

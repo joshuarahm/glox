@@ -10,6 +10,7 @@
 #include "glox/GloxTexture.hpp"
 
 #include <iostream>
+#include <fstream>
 #include <string>
 
 namespace glox {
@@ -23,6 +24,13 @@ public:
      * image. If there is an error, NULL is
      * returned */
 	static GloxTexture* textureFromBitmap( std::istream& stream );
+    static inline GloxTexture* textureFromBitmapFile( const char* filename ) {
+        std::ifstream ifs;
+        ifs.open( filename, std::ifstream::binary );
+
+        if( ! ifs.is_open() ) { return NULL; }
+        return textureFromBitmap( ifs );
+    }
 
 #ifndef NO_JPG_SUPPORT
 	static GloxTexture* buildTextureFromJpg( std::istream& stream );
