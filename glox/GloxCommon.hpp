@@ -28,6 +28,14 @@ namespace glox {
     #define GloxDisableFor( en, code ) \
         { glDisable( en ) ; code ; glEnable( en ) ; }
 
+    #define GloxWithTranslation( point, code ) \
+        { \
+            glox::GloxState::pushMatrix(); \
+            glox::GloxState::translate( (point) ); \
+            code; \
+            glox::GloxState::popMatrix(); \
+        }
+
     typedef long long Glox64;
     typedef unsigned long long Glox64u;
     typedef int Glox32;

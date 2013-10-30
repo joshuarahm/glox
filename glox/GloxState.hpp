@@ -23,6 +23,10 @@ public:
     inline static void matrixMode( GLenum val ) { glMatrixMode( val ) ; }
     inline static void loadIdentity() { glLoadIdentity(); }
 
+    inline static void rotate( float amt, const GloxPoint<>& vector ) {
+        glRotatef( amt, vector.getX(), vector.getY(), vector.getZ() );
+    }
+
     inline static void clear( GLbitfield val ) {
         glClear(val);
     }
