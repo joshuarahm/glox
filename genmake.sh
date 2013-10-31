@@ -5,6 +5,8 @@
 # This bash file is used to generate the makefile
 # to produce the library for the graphics library
 
+cd $(dirname $0)
+
 BINARY_NAME="libglox.a"
 
 obs=()
