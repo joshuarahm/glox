@@ -12,7 +12,7 @@
 namespace glox {
 	class GloxViewport : public GloxRenderable {
 	public:	
-		inline GloxViewport( int x, int y, int width, int height ) :
+		inline GloxViewport( int x=0, int y=0, int width=0, int height=0 ) :
 			m_x( x ), m_y( y ), m_width( width ), m_height( height ) {}
 
 		inline void render() const {

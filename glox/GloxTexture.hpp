@@ -13,18 +13,15 @@ namespace glox {
 
 class GloxTexture {
 public:
-    GloxTexture( int id, int width, int height ) :
-        m_id( id ), m_width( width ), m_height( height ) {}
+    GloxTexture( unsigned int id=0 ) :
+        m_id( id ) {}
 
-    int getId() const { return m_id ; }
-    int getWidth() const { return m_width; }
-    int getHeight() const { return m_height; }
-
+    unsigned int getId() const { return m_id ; }
     void bind() const { glBindTexture( GL_TEXTURE_2D, m_id ) ; }
+
+    void setId( unsigned int id ) { m_id = id; } 
 private:
-    int m_id;
-    int m_width;
-    int m_height;
+    unsigned int m_id;
 };
 
 }

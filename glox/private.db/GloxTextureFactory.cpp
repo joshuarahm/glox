@@ -136,7 +136,7 @@ GloxTexture* GloxTextureFactory::textureFromBitmap( std::istream& stream ) {
 
 	delete[] image;
 	
-	return new GloxTexture( texture, dx, dy );
+	return new GloxTexture( texture );
 }
 
 };
