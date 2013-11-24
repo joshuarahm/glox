@@ -14,10 +14,15 @@ void GloxLightSource::render() const {
 		glLightModelf( (*itr).first, (*itr).second );
 	}
 
-	glEnable( m_light );
+	float vec[4];
+	for( M_lm_map_vec_t::const_iterator itr = lightModelsAttrs_vectors.begin();
+		/* Set all of the attributes in the map */
+		itr != lightModelsAttrs_vectors.end() ; ++ itr ) {
+		(*itr).second.toVector( vec, 4 );
+		glLightModelfv( (*itr).first, vec );
+	}
 
-	/* Set the position of the light */
-	float vec [4];
+	glEnable( m_light );
 
 	this->ambient.toVector( vec, 4 );
 	//GloxTrace( "GloxLightSource", "ambient: {%f, %f, %f, %f}\n", vec[0], vec[1], vec[2], vec[3] );

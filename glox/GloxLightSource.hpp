@@ -61,11 +61,16 @@ public:
 		lightModelsAttrs[attr] = value;
 	}
 
+	inline void setLightModelAttribute( GLenum attr, const GloxColor& color ) {
+		lightModelsAttrs_vectors[attr] = color;
+	}
+
 	/* Reder this light source */
 	void render() const ;
 
 private:
 	typedef std::map<GLenum,float> M_lm_map_t;
+	typedef std::map< GLenum,GloxColor >  M_lm_map_vec_t;
 
 	GLenum m_light;
 
@@ -82,6 +87,7 @@ private:
 	GloxColor specular;
 
 	M_lm_map_t lightModelsAttrs;
+	M_lm_map_vec_t lightModelsAttrs_vectors;
 };
 
 }

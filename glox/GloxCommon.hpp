@@ -35,6 +35,13 @@ namespace glox {
             code; \
             glox::GloxState::popMatrix(); \
         }
+    #define GloxScale( amt, code ) \
+        { \
+            glox::GloxState::pushMatrix(); \
+            glScalef( amt,amt,amt ); \
+            code; \
+            glox::GloxState::popMatrix(); \
+        }
 
     typedef long long Glox64;
     typedef unsigned long long Glox64u;

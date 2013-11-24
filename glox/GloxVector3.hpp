@@ -10,6 +10,8 @@
 #include <string>
 #include <sstream>
 
+#include <cmath>
+
 namespace glox {
 template <class NumT=float>
 
@@ -41,6 +43,31 @@ public:
         y *= scalar;
         z *= scalar;
     }
+
+	inline GloxVector3<NumT> operator*( NumT scalar ) {
+		GloxVector3 tmp = *this;
+		tmp *= scalar;
+		return tmp;
+	}
+
+	inline GloxVector3<NumT> cross( const GloxVector3<NumT>& v ) {
+		return GloxVector3<NumT>(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x);
+	}
+
+	inline double getMagnitude() const {
+		return sqrt( x*x + y*y + z*z );
+	}
+
+	void normalize() {
+		double mag = getMagnitude();
+		x = x / mag;
+		y = y / mag;
+		z = z / mag;
+	}
+
+	inline GloxPoint<NumT> toPoint() {
+		return GloxPoint<NumT>( x, y, z );
+	}
 
     inline std::string toString() const {
         std::stringstream stream;

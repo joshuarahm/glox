@@ -15,7 +15,7 @@ template <class NumT=float>
 
 class GloxVector4 {
 public:
-	inline GloxVector4( const NumT& x, const NumT& y, const NumT& z, const NumT& w ) :
+	inline GloxVector4( const NumT& x=0, const NumT& y=0, const NumT& z=0, const NumT& w=0 ) :
 		x( x ), y( y ), z( z ), w( w ) {}
 
 	inline const NumT& getX() const { return x; }

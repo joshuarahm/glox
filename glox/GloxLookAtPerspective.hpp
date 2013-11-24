@@ -27,9 +27,9 @@ public:
 		m_LookAtPoint( lookAt ), m_UpVector( upVec ) {}
 	
 	inline virtual void render() const {
-		GloxTrace( "GloxLookAtPerspective", "gluLookAt: %s %s %s\n",
-			getPosition().toString().c_str(), m_LookAtPoint.toString().c_str(),
-			m_UpVector.toString().c_str() );
+//		GloxTrace( "GloxLookAtPerspective", "gluLookAt: %s %s %s\n",
+//			getPosition().toString().c_str(), m_LookAtPoint.toString().c_str(),
+//			m_UpVector.toString().c_str() );
 
 		gluLookAt( getPosition().getX(), getPosition().getY(), getPosition().getZ(),
 		           m_LookAtPoint.getX(), m_LookAtPoint.getY(), m_LookAtPoint.getZ(),

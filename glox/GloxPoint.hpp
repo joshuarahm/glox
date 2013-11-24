@@ -106,8 +106,21 @@ public:
 	/* Returns a new GloxPoint that is the sum
 	 * of this and `point` */
 	inline GloxPoint<NumT> operator+( const GloxPoint<NumT>& point ) const {
-		GloxPoint<NumT> ret;
+		GloxPoint<NumT> ret = *this;
 		ret += point;
+		return ret;
+	}
+
+	inline GloxPoint<NumT>& operator*=( NumT scalar ) {
+		x *= scalar;
+		y *= scalar;
+		z *= scalar;
+		return * this;
+	}
+
+	inline GloxPoint<NumT> operator*(NumT scalar) {
+		GloxPoint<NumT> ret = * this;
+		ret *= scalar;
 		return ret;
 	}
 
