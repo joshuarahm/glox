@@ -6,9 +6,9 @@ using namespace glox ;
 using namespace std ;
 
 GloxProgram::GloxProgram( ) {   
-    cout << "Creating program2" << endl;
+    // cout << "Creating program2" << endl;
     this->id = glCreateProgram() ;
-    cout << "Done making program" << endl ;
+    // cout << "Done making program" << endl ;
 }
 
 int GloxProgram::attachShader( const GloxShader& shader ) {
