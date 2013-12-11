@@ -31,6 +31,14 @@ public:
 
     int getUniformLocation( const char* uniform ) ;
 
+    inline void setUniformFloat( int uniform, float fl ) {
+        glUniform1f( uniform, fl ) ;
+    }
+
+    inline void setUniformInteger( int uniform, float i ) {
+        glUniform1f( uniform, i ) ;
+    }
+
     template <class Vectorizable3>
     inline void setUniformVector3( int uniform, const Vectorizable3& point ) {
         glUniform3f( uniform, point.getX(), point.getY(), point.getZ() ) ;
