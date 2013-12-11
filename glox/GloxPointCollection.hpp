@@ -8,6 +8,7 @@
  */
 
 #include "glox/GloxPlottable.hpp"
+#include "glox/GloxPoint.hpp"
 #include "glox/GloxDebug.hpp"
 
 #include <vector>
@@ -37,7 +38,7 @@ public:
 	 * initial starting points `points`
 	 */
 	inline GloxPointCollection( const m_Vec_t& points ) {
-		this.points = points;
+		this->points = points;
 	}
 	
 	/* Iterate through the vector of Plottable

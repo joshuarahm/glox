@@ -8,7 +8,12 @@
 #include <cstdlib>
 
 /* Include the OpenGL stuff */
+
+#ifdef NO_USE_GLEW
 #include <GL/gl.h>
+#else
+#include <GL/glew.h>
+#endif
 
 /*
  * Author: jrahm
@@ -59,6 +64,9 @@ namespace glox {
     inline double GloxSin( double th ) {
         return sin(3.1415927/180*(th));
     }
+
+    #define GloxToDegrees( th ) \
+        ((180 * (th)) / 3.14159927)
 
 };
 

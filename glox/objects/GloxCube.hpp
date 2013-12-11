@@ -24,7 +24,12 @@ public:
     /* Creates a new cube with the size
      * `size`. The size is the length of
      * each side of the cube */
-    GloxCube( float size, const GloxColor& color );
+    GloxCube( float x, float y, float z, const GloxColor& color );
+
+	inline GloxCube( const GloxCube& other ) {
+		m_disp_list = other.m_disp_list ;
+		m_color = other.m_color;
+	}
 
     /* Draw this cube */
     void draw() const ;
@@ -40,21 +45,7 @@ public:
     }
     
 private:
-    /* A typedef to make my life easier */
-    typedef GloxPointCollection< GloxPoint<> > _M_Square;
-
-    /* +/- y axis */
-    _M_Square m_top;
-    _M_Square m_bottom;
-    
-    /* -/+ z axis */
-    _M_Square m_front;
-    _M_Square m_back;
-
-    /* -/+ x axis */
-    _M_Square m_left;
-    _M_Square m_right;
-
+    int m_disp_list ;
     /* The color of this cube */
     GloxColor m_color;
 };

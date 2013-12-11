@@ -12,8 +12,11 @@
 #include "glox/GloxVectorizable.hpp"
 #include "glox/GloxVector4.hpp"
 
+#include <iostream>
 #include <string>
 #include <sstream>
+
+#include <cmath>
 
 namespace glox {
 
@@ -84,6 +87,10 @@ public:
 		this->z = z;
 	}
 
+    inline float getMagnitude() const {
+        return sqrt( x * x + y * y + z * z ) ;
+    }
+
 	/* Copy the point `point` into this
 	 * point */
 	inline const GloxPoint<NumT>& operator=( const GloxPoint<NumT>& point ) {
@@ -103,11 +110,28 @@ public:
 		return * this;
 	}
 
+	/* Add the components of `point` to this */
+	inline GloxPoint<NumT>& operator-=( const GloxPoint<NumT>& point ) {
+		this->x -= point.x;
+		this->y -= point.y;
+		this->z -= point.z;
+
+		return * this;
+	}
+
 	/* Returns a new GloxPoint that is the sum
 	 * of this and `point` */
 	inline GloxPoint<NumT> operator+( const GloxPoint<NumT>& point ) const {
 		GloxPoint<NumT> ret = *this;
 		ret += point;
+		return ret;
+	}
+
+	/* Returns a new GloxPoint that is the sum
+	 * of this and `point` */
+	inline GloxPoint<NumT> operator-( const GloxPoint<NumT>& point ) const {
+		GloxPoint<NumT> ret = *this;
+		ret -= point;
 		return ret;
 	}
 
@@ -118,11 +142,41 @@ public:
 		return * this;
 	}
 
-	inline GloxPoint<NumT> operator*(NumT scalar) {
+	inline GloxPoint<NumT> operator*(NumT scalar) const {
 		GloxPoint<NumT> ret = * this;
 		ret *= scalar;
 		return ret;
 	}
+
+    inline NumT dot( const GloxPoint<NumT>& other ) {
+        GloxPoint<> tmp1 = *this;
+        GloxPoint<> tmp2 = other;
+
+        // std::cout << "Orig: " << this->toString() << ", " << other.toString() << std::endl;
+        tmp1.normalize();
+        tmp2.normalize();
+
+        // std::cout << "Norm: " << this->toString() << ", " << other.toString() << std::endl;;
+        return tmp1.x * tmp2.x +
+               tmp1.y * tmp2.y +
+               tmp1.z * tmp2.z ;
+    }
+
+    inline GloxPoint<NumT> cross( const GloxPoint<NumT>& other ) {
+        return GloxPoint( 
+              y * other.z - z * other.y
+            , z * other.x - x * other.z
+            , x * other.y - y * other.x
+        );
+    }
+
+    inline void normalize() {
+        float mag = getMagnitude();
+
+        x = x / mag;
+        y = y / mag;
+        z = z / mag;
+    }
 
     inline std::string toString() const {
         std::stringstream stream;

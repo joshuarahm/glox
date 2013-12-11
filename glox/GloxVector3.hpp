@@ -7,6 +7,8 @@
  * GloxVector3.hpp: <description>
  */
 
+#include "glox/GloxPoint.hpp"
+
 #include <string>
 #include <sstream>
 

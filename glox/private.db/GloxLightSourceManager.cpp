@@ -1,6 +1,8 @@
 #include "glox/GloxLightSourceManager.hpp"
 #include "glox/GloxState.hpp"
+#include <iostream>
 
+using namespace std;
 namespace glox {
 
 int light_source_gl[] = {
@@ -22,7 +24,7 @@ void GloxLightSourceManager::render() const {
     GloxState::enable(GL_COLOR_MATERIAL);
 
 	for ( size_t i = 0 ; i < GLOX_MAX_NUM_LIGHTS; ++ i ) {
-		if( m_sources[i] ) {
+		if( m_sources[i] && m_sources[i]->isEnabled() ) {
 			m_sources[i]->render();
 		}
 	}

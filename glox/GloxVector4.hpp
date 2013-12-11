@@ -23,6 +23,11 @@ public:
 	inline const NumT& getZ() const { return z; }
 	inline const NumT& getW() const { return w; }
 
+	inline const NumT& get0() const { return x; }
+	inline const NumT& get1() const { return y; }
+	inline const NumT& get2() const { return z; }
+	inline const NumT& get3() const { return w; }
+
 	inline void setX( const NumT& x ) { this->x = x; }
 	inline void setY( const NumT& y ) { this->y = y; }
 	inline void setZ( const NumT& z ) { this->z = z; }
