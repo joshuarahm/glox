@@ -18,7 +18,7 @@ function generate_depends {
 	deps=$1
 	for i in $next ; do
 		for canidate in $(generate_depends $i) ; do
-			if [[ ! $deps =~ $i ]] ; then
+			if [[ ! $deps =~ $i ]] && [[ -e $i ]] ; then
 				deps="$deps \\$(echo -ne '\n                            ')$i"
 			fi
 		done
@@ -55,7 +55,7 @@ exec 3<> Makefile
 echo 'CPPC?=g++'>&3
 echo 'AR?=ar'>&3
 echo 'OPTFLAGS?=-g3 -ggdb'>&3
-echo "CFLAGS=$CFLAGS -Wall -Wextra -I. "'$(OPTFLAGS)'" -D DEBUG_LEVEL_TRACE -Islox -Iglox">&3
+echo "CFLAGS=$CFLAGS -Wall -Wextra -Icompat -I. "'$(OPTFLAGS)'" -D DEBUG_LEVEL_TRACE -Islox -Iglox">&3
 echo "LDFLAGS=$LDFLAGS">&3
 echo 'OBJECTS='${obs[@]}>&3
 echo 'BINARY='$BINARY_NAME>&3
